@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Rick and Morty Explorer</title>
@@ -7,19 +7,27 @@
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
 
+    <!-- Header -->
     <header class="text-center py-8">
-        <h1 class="text-4xl font-bold text-green-400">
+        <h1 id="title" class="text-4xl font-bold text-green-400">
             Rick and Morty Explorer
         </h1>
+
+        <!-- Botón para cambiar idioma -->
+        <button 
+            id="toggleLang"
+            class="mt-4 bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600"
+        >
+            EN / ES
+        </button>
     </header>
 
-    <!-- Filtros -->
+    <!-- Buscador -->
     <section class="flex flex-col md:flex-row gap-4 justify-center items-center px-4">
-
         <input 
             type="text" 
             id="searchInput"
-            placeholder="Buscar personaje..."
+            placeholder="Search character..."
             class="px-4 py-2 rounded-lg text-black w-64"
         >
 
@@ -27,12 +35,11 @@
             id="statusFilter"
             class="px-4 py-2 rounded-lg text-black"
         >
-            <option value="">Todos</option>
+            <option value="">All</option>
             <option value="alive">Alive</option>
             <option value="dead">Dead</option>
             <option value="unknown">Unknown</option>
         </select>
-
     </section>
 
     <!-- Contenedor de personajes -->
@@ -40,7 +47,6 @@
         id="charactersContainer"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-8"
     >
-        <!-- Aquí se renderizarán las cards -->
     </main>
 
     <!-- Paginación -->
@@ -52,7 +58,7 @@
             Previous
         </button>
 
-        <span id="pageInfo">Página 1</span>
+        <span id="pageInfo">Page 1</span>
 
         <button 
             id="nextPage"
@@ -62,6 +68,6 @@
         </button>
     </section>
 
-    <script src="js/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
 </body>
 </html>
