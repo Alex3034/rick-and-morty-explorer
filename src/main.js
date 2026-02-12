@@ -1,9 +1,15 @@
-import { texts, updateTexts } from './i18n.js';
+import { updateTexts } from './i18n.js';
+
+// Lógica de cambio de idioma
 
 let currentLang = 'en';
-updateTexts(currentLang);
+const toggleBtn = document.getElementById('toggleLang');
 
-document.getElementById("toggleLang").addEventListener("click", () => {
+toggleBtn.addEventListener('click', () => {
     currentLang = currentLang === 'en' ? 'es' : 'en';
     updateTexts(currentLang);
+    toggleBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
 });
+
+updateTexts(currentLang);
+toggleBtn.textContent = 'ES';
