@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Rick and Morty Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+    <header class="text-center py-8">
+        <h1 class="text-4xl font-bold text-green-400">
+            Rick and Morty Explorer
+        </h1>
+    </header>
+
+    <!-- Filtros -->
+    <section class="flex flex-col md:flex-row gap-4 justify-center items-center px-4">
+
+        <input 
+            type="text" 
+            id="searchInput"
+            placeholder="Buscar personaje..."
+            class="px-4 py-2 rounded-lg text-black w-64"
+        >
+
+        <select 
+            id="statusFilter"
+            class="px-4 py-2 rounded-lg text-black"
+        >
+            <option value="">Todos</option>
+            <option value="alive">Alive</option>
+            <option value="dead">Dead</option>
+            <option value="unknown">Unknown</option>
+        </select>
+
+    </section>
+
+    <!-- Contenedor de personajes -->
+    <main 
+        id="charactersContainer"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-8"
+    >
+        <!-- Aquí se renderizarán las cards -->
+    </main>
+
+    <!-- Paginación -->
+    <section class="flex justify-center items-center gap-6 pb-8">
+        <button 
+            id="prevPage"
+            class="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600"
+        >
+            Previous
+        </button>
+
+        <span id="pageInfo">Página 1</span>
+
+        <button 
+            id="nextPage"
+            class="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600"
+        >
+            Next
+        </button>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
