@@ -1,3 +1,4 @@
+import './style.css';
 import { updateTexts } from './i18n.js';
 import { fetchCharacters } from "./api.js";
 import { renderCharacters } from "./render.js";
@@ -15,10 +16,10 @@ toggleBtn.addEventListener('click', () => {
 updateTexts(currentLang);
 toggleBtn.textContent = 'ES';
 
-// lógica de inicialización y prueba de API
+// lógica de inicialización
 async function init() {
     const data = await fetchCharacters(1);
-    console.log(data);
+    renderCharacters(data.results);
 }
 
 init();
