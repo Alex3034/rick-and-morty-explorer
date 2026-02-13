@@ -31,6 +31,6 @@ export function updateTexts(lang) {
     document.getElementById("statusFilter").options[1].textContent = t.alive;
     document.getElementById("statusFilter").options[2].textContent = t.dead;
     document.getElementById("statusFilter").options[3].textContent = t.unknown;
-    document.getElementById("prevPage").textContent = t.prev;
-    document.getElementById("nextPage").textContent = t.next;
+    document.getElementById("prevPageBtn").textContent = t.prev;
+    document.getElementById("nextPageBtn").textContent = t.next;
 }

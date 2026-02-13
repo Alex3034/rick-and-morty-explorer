@@ -16,10 +16,36 @@ toggleBtn.addEventListener('click', () => {
 updateTexts(currentLang);
 toggleBtn.textContent = 'ES';
 
+// Lógica de paginación
+const prevPageBtn = document.getElementById("prevPageBtn");
+const nextpagBtn = document.getElementById("nextPageBtn");
+const pageNumber = document.getElementById("pageNumber");
+
+prevPageBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage--;
+        loadPage(currentPage);
+        pageNumber.textContent = currentPage;
+    }
+});
+
+nextpagBtn.addEventListener("click", () => {
+    currentPage++;
+    loadPage(currentPage);
+    pageNumber.textContent = currentPage;
+});
+
+// Lógica de carga de personajes por página
+let currentPage = 1;
+
+async function loadPage(page) {
+    const data = await fetchCharacters(page);
+    renderCharacters(data.results);
+}
+
 // lógica de inicialización
 async function init() {
-    const data = await fetchCharacters(1);
-    renderCharacters(data.results);
+    loadPage(currentPage);
 }
 
 init();
