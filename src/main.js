@@ -1,7 +1,8 @@
 import { updateTexts } from './i18n.js';
+import { fetchCharacters } from "./api.js";
+import { renderCharacters } from "./render.js";
 
 // Lógica de cambio de idioma
-
 let currentLang = 'en';
 const toggleBtn = document.getElementById('toggleLang');
 
@@ -13,3 +14,11 @@ toggleBtn.addEventListener('click', () => {
 
 updateTexts(currentLang);
 toggleBtn.textContent = 'ES';
+
+// lógica de inicialización y prueba de API
+async function init() {
+    const data = await fetchCharacters(1);
+    console.log(data);
+}
+
+init();
