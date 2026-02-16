@@ -22,24 +22,24 @@ let hasNextPage = true;
 let hasPrevPage = false;
 
 const prevPageBtn = document.getElementById("prevPageBtn");
-const nextpagBtn = document.getElementById("nextPageBtn");
+const nextPageBtn = document.getElementById("nextPageBtn");
 const pageNumber = document.getElementById("pageNumber");
 
 prevPageBtn.addEventListener("click", async () => {
     if (!hasPrevPage) return;
 
     prevPageBtn.disabled = true;
-    nextpagBtn.disabled = true;
+    nextPageBtn.disabled = true;
 
     currentPage--;
     await loadPage(currentPage);
 });
 
-nextpagBtn.addEventListener("click", async () => {
+nextPageBtn.addEventListener("click", async () => {
     if (!hasNextPage) return;
 
     prevPageBtn.disabled = true;
-    nextpagBtn.disabled = true;
+    nextPageBtn.disabled = true;
 
     currentPage++;
     await loadPage(currentPage);
@@ -47,29 +47,42 @@ nextpagBtn.addEventListener("click", async () => {
 
 // Lógica de carga de personajes por página
 async function loadPage(page) {
-    try {
-        const data = await fetchCharacters(page);
+    const data = await fetchCharacters(page, currentSearch, currentStatus);
 
-        if (!data?.results) {
-            throw new Error("Datos inválidos");
-        }
+    if (!data) return;
 
-        renderCharacters(data.results);
+    renderCharacters(data.results);
 
-        hasPrevPage = !!data.info.prev;
-        hasNextPage = !!data.info.next;
+    hasNextPage = !!data.info.next;
+    hasPrevPage = !!data.info.prev;
 
-        pageNumber.textContent = page;
+    prevPageBtn.disabled = !hasPrevPage;
+    nextPageBtn.disabled = !hasNextPage;
 
-    } catch (error) {
-        console.error("Error:", error);
-    } finally {
-        prevPageBtn.disabled = !hasPrevPage;
-        nextpagBtn.disabled = !hasNextPage;
-    }
+    pageNumber.textContent = `Page ${page}`;
 }
 
 
+// Lógica de búsqueda por nombre y estado
+let currentSearch = "";
+let currentStatus = "";
+
+const searchInput = document.getElementById("searchInput");
+const statusFilter = document.getElementById("statusFilter");
+
+searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        currentSearch = e.target.value.trim();
+        currentPage = 1;
+        loadPage(currentPage);
+    }
+});
+
+statusFilter.addEventListener("change", (e) => {
+    currentStatus = e.target.value;
+    currentPage = 1;
+    loadPage(currentPage);
+});
 
 // lógica de inicialización
 async function init() {
