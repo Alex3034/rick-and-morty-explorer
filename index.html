@@ -1,79 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Rick and Morty Explorer</title>
 </head>
+
 <body class="bg-gray-900 text-white min-h-screen">
 
     <header class="relative py-8">
 
-    <!-- Botón idioma -->
-    <div class="absolute top-6 right-8">
-        <button 
-            id="toggleLang"
-            class="text-sm border border-gray-500 px-3 py-1 rounded-md hover:bg-gray-800 transition"
-        >
-            EN
-        </button>
-    </div>
+        <!-- Botón idioma -->
+        <div class="absolute top-6 right-8">
+            <button id="toggleLang"
+                class="text-sm border border-gray-500 px-3 py-1 rounded-md hover:bg-gray-800 transition">
+                EN
+            </button>
+        </div>
 
-    <h1 
-        id="title" 
-        class="text-4xl font-bold text-green-400 text-center"
-    >
-        Rick and Morty Explorer
-    </h1>
+        <h1 id="title" class="text-4xl font-bold text-green-400 text-center">
+            Rick and Morty Explorer
+        </h1>
 
-</header>
+    </header>
 
 
     <!-- Buscador -->
     <section class="flex flex-col md:flex-row gap-4 justify-center items-center px-4">
-        <input 
-            type="text" 
-            id="searchInput"
-            placeholder="Search character..."
-            class="px-4 py-2 rounded-lg bg-white text-black w-64"
-        >
+        <input type="text" id="searchInput" placeholder="Search character..."
+            class="px-4 py-2 rounded-lg bg-white text-black w-64">
 
-        <select 
-            id="statusFilter"
-            class="px-4 py-2 rounded-lg bg-white text-black"
-        >
+        <select id="statusFilter" class="px-4 py-2 rounded-lg bg-white text-black">
             <option value="">All</option>
             <option value="alive">Alive</option>
             <option value="dead">Dead</option>
             <option value="unknown">Unknown</option>
         </select>
     </section>
+    
+    <!-- Indicador de carga -->
+    <div id="loadingIndicator" class="hidden flex justify-center items-center py-8">
+        <div class="flex flex-col items-center gap-4">
+            <div class="w-12 h-12 border-4 border-green-400 border-t-transparent rounded-full animate-spin"></div>
+            <p class="text-green-400 font-semibold">Loading characters...</p>
+        </div>
+    </div>
 
     <!-- Contenedor de personajes -->
-    <main 
-        id="charactersContainer"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-8"
-    >
+    <main id="charactersContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-8">
     </main>
 
     <!-- Paginación -->
     <section class="flex justify-center items-center gap-6 pb-8">
-        <button 
-            id="prevPageBtn"
-            class="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600 disabled:opacity-40 disabled:cursor-not-allowed"
-        >
+        <button id="prevPageBtn"
+            class="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600 disabled:opacity-40 disabled:cursor-not-allowed">
             Previous
         </button>
 
         <span id="pageNumber">Page 1</span>
 
-        <button 
-            id="nextPageBtn"
-            class="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600 disabled:opacity-40 disabled:cursor-not-allowed"
-        >
+        <button id="nextPageBtn"
+            class="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600 disabled:opacity-40 disabled:cursor-not-allowed">
             Next
         </button>
     </section>
 
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/main.js" defer></script>
 </body>
+
 </html>
