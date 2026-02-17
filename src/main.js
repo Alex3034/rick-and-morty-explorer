@@ -16,77 +16,78 @@ toggleBtn.addEventListener('click', () => {
 updateTexts(currentLang);
 toggleBtn.textContent = 'ES';
 
-// Lógica de paginación
-let currentPage = 1;
-let hasNextPage = true;
-let hasPrevPage = false;
+// Estado global para paginación y filtros
+let state = {
+    currentPage: 1,
+    currentName: "",
+    currentStatus: ""
+};
 
+// Función para actualizar la lista de personajes según el estado actual
+async function updateCharacters() {
+    try {
+        const data = await fetchCharacters(state.currentPage, state.currentName, state.currentStatus);
+
+        if (!data?.results || data.results.length === 0) {
+            document.getElementById("charactersContainer").innerHTML = "<p>No characters found</p>";
+            prevPageBtn.disabled = true;
+            nextPageBtn.disabled = true;
+            return;
+        }
+
+        renderCharacters(data.results);
+
+        prevPageBtn.disabled = !data.info.prev;
+        nextPageBtn.disabled = !data.info.next;
+
+        pageNumber.textContent = state.currentPage;
+
+    } catch (error) {
+        console.error("Error updating characters:", error);
+        document.getElementById("charactersContainer").innerHTML = "<p>Error loading characters</p>";
+    }
+}
+
+
+// Lógica de paginación
 const prevPageBtn = document.getElementById("prevPageBtn");
 const nextPageBtn = document.getElementById("nextPageBtn");
 const pageNumber = document.getElementById("pageNumber");
 
-prevPageBtn.addEventListener("click", async () => {
-    if (!hasPrevPage) return;
-
-    prevPageBtn.disabled = true;
-    nextPageBtn.disabled = true;
-
-    currentPage--;
-    await loadPage(currentPage);
+prevPageBtn.addEventListener("click", () => {
+    if (state.currentPage > 1) {
+        state.currentPage--;
+        updateCharacters();
+    }
 });
 
-nextPageBtn.addEventListener("click", async () => {
-    if (!hasNextPage) return;
-
-    prevPageBtn.disabled = true;
-    nextPageBtn.disabled = true;
-
-    currentPage++;
-    await loadPage(currentPage);
+nextPageBtn.addEventListener("click", () => {
+    state.currentPage++;
+    updateCharacters();
 });
-
-// Lógica de carga de personajes por página
-async function loadPage(page) {
-    const data = await fetchCharacters(page, currentSearch, currentStatus);
-
-    if (!data) return;
-
-    renderCharacters(data.results);
-
-    hasNextPage = !!data.info.next;
-    hasPrevPage = !!data.info.prev;
-
-    prevPageBtn.disabled = !hasPrevPage;
-    nextPageBtn.disabled = !hasNextPage;
-
-    pageNumber.textContent = `Page ${page}`;
-}
 
 
 // Lógica de búsqueda por nombre y estado
-let currentSearch = "";
-let currentStatus = "";
-
 const searchInput = document.getElementById("searchInput");
 const statusFilter = document.getElementById("statusFilter");
 
 searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        currentSearch = e.target.value.trim();
-        currentPage = 1;
-        loadPage(currentPage);
+        state.currentName = searchInput.value.trim();
+        state.currentPage = 1;
+        updateCharacters();
     }
 });
 
-statusFilter.addEventListener("change", (e) => {
-    currentStatus = e.target.value;
-    currentPage = 1;
-    loadPage(currentPage);
+statusFilter.addEventListener("change", () => {
+    state.currentStatus = statusFilter.value;
+    state.currentPage = 1;
+    updateCharacters();
 });
 
 // lógica de inicialización
 async function init() {
-    loadPage(currentPage);
+    updateCharacters();
 }
 
 init();
