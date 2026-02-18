@@ -37,7 +37,7 @@
             <option value="unknown">Unknown</option>
         </select>
     </section>
-    
+
     <!-- Indicador de carga -->
     <div id="loadingIndicator" class="hidden flex justify-center items-center py-8">
         <div class="flex flex-col items-center gap-4">
@@ -64,6 +64,26 @@
             Next
         </button>
     </section>
+
+    <!-- Modal info -->
+    <div id="modal" class="fixed inset-0 bg-[rgba(0,0,0,0.6)] hidden items-center justify-center z-50">
+
+        <div class="bg-gray-900 text-white rounded-lg w-11/12 max-w-lg p-6 relative">
+
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                ✖
+            </button>
+
+            <h2 id="modalName" class="text-2xl font-bold mb-4"></h2>
+
+            <img id="modalImage" class="w-full rounded mb-4" />
+
+            <div id="modalInfo" class="space-y-2 text-sm">
+            </div>
+
+        </div>
+
+    </div>
 
     <script type="module" src="/src/main.js" defer></script>
 </body>

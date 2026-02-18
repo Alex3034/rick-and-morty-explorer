@@ -1,3 +1,5 @@
+import { openModal } from "./modal.js";
+
 export function renderCharacters(characters) {
     const container = document.getElementById("charactersContainer");
     const fragment = document.createDocumentFragment();
@@ -52,8 +54,21 @@ export function renderCharacters(characters) {
         species.className = "text-gray-300";
         species.textContent = `Species: ${character.species}`;
 
+        // ----- Buttons -----
+        const infoBtn = document.createElement("button");
+        const favoriteBtn = document.createElement("button");
+
+        favoriteBtn.textContent = "Favorite";
+        favoriteBtn.className = "mt-2 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm";
+
+        infoBtn.textContent = "More Info";
+        infoBtn.className = "mt-2 bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm";
+        infoBtn.onclick = () => openModal(character);
+
         infoContainer.appendChild(status);
         infoContainer.appendChild(species);
+        infoContainer.appendChild(infoBtn);
+        infoContainer.appendChild(favoriteBtn);
         card.appendChild(img);
         card.appendChild(title);
         card.appendChild(infoContainer);
