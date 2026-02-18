@@ -1,4 +1,5 @@
 import { openModal } from "./modal.js";
+import { isFavorite, addFavorite, removeFavorite } from "./favorites.js";
 
 export function renderCharacters(characters) {
     const container = document.getElementById("charactersContainer");
@@ -58,8 +59,17 @@ export function renderCharacters(characters) {
         const infoBtn = document.createElement("button");
         const favoriteBtn = document.createElement("button");
 
-        favoriteBtn.textContent = "Favorite";
-        favoriteBtn.className = "mt-2 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm";
+        favoriteBtn.textContent = isFavorite(character) ? "❤️" : "🤍";
+        favoriteBtn.className = "mt-2 text-white px-3 py-1 text-sm";
+
+        favoriteBtn.onclick = () => {
+            if (isFavorite(character)) {
+                removeFavorite(character);
+            } else {
+                addFavorite(character);
+            }
+            favoriteBtn.textContent = isFavorite(character) ? "❤️" : "🤍";
+        };
 
         infoBtn.textContent = "More Info";
         infoBtn.className = "mt-2 bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm";
