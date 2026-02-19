@@ -2,6 +2,7 @@ import './style.css';
 import { updateTexts } from './i18n.js';
 import { fetchCharacters } from "./api.js";
 import { renderCharacters } from "./render.js";
+import { renderEmptyState } from './render.js';
 
 // Lógica de cambio de idioma
 let currentLang = 'en';
@@ -25,7 +26,6 @@ let state = {
 
 // Función para actualizar la lista de personajes según el estado actual
 async function updateCharacters() {
-    const charactersContainer = document.getElementById("charactersContainer");
     const loading = document.getElementById("loadingIndicator");
     loading.classList.remove("hidden");
 
@@ -33,7 +33,7 @@ async function updateCharacters() {
         const data = await fetchCharacters(state.currentPage, state.currentName, state.currentStatus);
 
         if (!data?.results || data.results.length === 0) {
-            charactersContainer.innerHTML = "<p>No characters found</p>";
+            renderEmptyState();
             prevPageBtn.disabled = true;
             nextPageBtn.disabled = true;
             return;

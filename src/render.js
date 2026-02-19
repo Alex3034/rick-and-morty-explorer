@@ -1,11 +1,13 @@
 import { openModal } from "./modal.js";
 import { isFavorite, addFavorite, removeFavorite } from "./favorites.js";
 
+const charactersContainer = document.getElementById("charactersContainer");
+const emptyStateContainer = document.getElementById("emptyStateContainer");
+
 export function renderCharacters(characters) {
-    const container = document.getElementById("charactersContainer");
     const fragment = document.createDocumentFragment();
 
-    container.textContent = "";
+    clearContainers();
 
     characters.forEach(character => {
         // ----- Card -----
@@ -92,5 +94,37 @@ export function renderCharacters(characters) {
         fragment.appendChild(card);
     });
 
-    container.appendChild(fragment);
+    charactersContainer.appendChild(fragment);
+}
+
+function clearContainers() {
+    charactersContainer.textContent = "";
+    emptyStateContainer.textContent = "";
+}
+
+export function renderEmptyState() {
+    clearContainers();
+
+    const message = document.createElement("div");
+    message.className = `
+        flex 
+        flex-col 
+        items-center 
+        justify-center 
+        text-center 
+        py-16 
+        text-gray-400
+    `;
+
+    message.innerHTML = `
+        <p class="text-5xl mb-4">🔍</p>
+        <h2 class="text-2xl font-semibold mb-2 text-white">
+            No characters found
+        </h2>
+        <p class="text-sm">
+            Try adjusting your search.
+        </p>
+    `;
+
+    emptyStateContainer.appendChild(message);
 }
