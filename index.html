@@ -68,21 +68,26 @@
     <!-- Modal info -->
     <div id="modal" class="fixed inset-0 bg-[rgba(0,0,0,0.6)] hidden items-center justify-center z-50">
 
-        <div class="bg-gray-900 text-white rounded-lg w-11/12 max-w-lg p-6 relative">
+        <div class="bg-gray-900 text-white rounded-2xl w-11/12 max-w-xl p-8 relative shadow-2xl">
 
-            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
-                ✖
+            <button id="closeModalBtn"
+                class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl transition-colors">
+                ×
             </button>
 
-            <h2 id="modalName" class="text-2xl font-bold mb-4"></h2>
+            <img id="modalImage" class="w-40 h-40 object-cover rounded-full mx-auto mb-4 border-4 border-gray-700" />
 
-            <img id="modalImage" class="w-full rounded mb-4" />
+            <h2 id="modalName" class="text-3xl font-semibold text-center mb-2"></h2>
 
-            <button id="modalFavoriteBtn" class="mt-2 text-white px-3 py-1 text-sm"></button>
+            <div class="flex justify-center mb-6 mt-4">
+                <button id="modalFavoriteBtn"
+                    class="px-5 py-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors text-sm"></button>
+            </div>
 
-            <div id="modalInfo" class="space-y-2 text-sm"></div>
+            <div id="modalInfo" class="space-y-3 text-base text-gray-300 border-t border-gray-800 pt-6"></div>
 
         </div>
+
 
     </div>
 
