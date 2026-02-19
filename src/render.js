@@ -11,29 +11,33 @@ export function renderCharacters(characters) {
         // ----- Card -----
         const card = document.createElement("div");
         card.className = `
-            bg-gray-800 
-            rounded-lg 
-            p-4 
-            shadow-lg 
-            hover:scale-105 
-            transition-transform 
+            bg-gray-800
+            rounded-xl
+            overflow-hidden
+            shadow-md
+            hover:shadow-xl
+            hover:-translate-y-1
+            transition-all
             duration-300
+            flex
+            flex-col
         `;
+
 
         // ----- Imagen -----
         const img = document.createElement("img");
         img.src = character.image;
         img.alt = character.name;
-        img.className = "rounded-lg mb-4 w-full";
+        img.className = "w-full h-56 object-cover";
 
         // ----- Nombre -----
         const title = document.createElement("h2");
-        title.className = "text-lg font-bold text-green-400 mb-2";
+        title.className = "text-xl font-semibold text-white tracking-wide px-6 pt-4";
         title.textContent = character.name;
 
         // ----- Contenedor info -----
         const infoContainer = document.createElement("div");
-        infoContainer.className = "text-sm space-y-1";
+        infoContainer.className = "text-sm space-y-2 px-6 pb-6 pt-2 flex-1 flex flex-col justify-between";
 
         // ----- Status -----
         const status = document.createElement("p");
@@ -56,11 +60,13 @@ export function renderCharacters(characters) {
         species.textContent = `Species: ${character.species}`;
 
         // ----- Buttons -----
+        const buttonsContainer = document.createElement("div");
         const infoBtn = document.createElement("button");
         const favoriteBtn = document.createElement("button");
-
+        
+        buttonsContainer.className = "flex justify-between items-center mt-4";
         favoriteBtn.textContent = isFavorite(character) ? "❤️" : "🤍";
-        favoriteBtn.className = "mt-2 text-white px-3 py-1 text-sm";
+        favoriteBtn.className = "text-xl hover:scale-110 transition-transform duration-200";
 
         favoriteBtn.onclick = () => {
             if (isFavorite(character)) {
@@ -77,8 +83,9 @@ export function renderCharacters(characters) {
 
         infoContainer.appendChild(status);
         infoContainer.appendChild(species);
-        infoContainer.appendChild(infoBtn);
-        infoContainer.appendChild(favoriteBtn);
+        buttonsContainer.appendChild(infoBtn);
+        buttonsContainer.appendChild(favoriteBtn);
+        infoContainer.appendChild(buttonsContainer);
         card.appendChild(img);
         card.appendChild(title);
         card.appendChild(infoContainer);
