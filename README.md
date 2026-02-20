@@ -30,7 +30,7 @@ Está diseñada con **JavaScript modular**, **Tailwind CSS** y sigue buenas prá
 
 ![Mensaje vacío](./assets/screenshots/empty-state.png)
 
-**Modal con información detallada y favoritos:**
+**Vista responsiva en móvil:**
 
 ![Vista en móvil](./assets/screenshots/mobile.png)
 
