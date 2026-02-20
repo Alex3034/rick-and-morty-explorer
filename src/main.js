@@ -1,4 +1,3 @@
-import './style.css';
 import { updateTexts } from './i18n.js';
 import { fetchCharacters } from "./api.js";
 import { renderCharacters } from "./render.js";
